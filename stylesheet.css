@@ -43,10 +43,15 @@
             left: -50px;
             opacity: 0;
         }
-    
-        50%{
-            left: -25px;
-            opacity: 0.5
+        
+        33%{
+            left: -36px;
+            opacity: 0.33;
+        }
+
+        66%{
+            left: -18px;
+            opacity: 0.66
         }
         
         100%{
@@ -61,9 +66,14 @@
             opacity: 0;
         }
     
-        50%{
-            left: 25px;
-            opacity: 0.5
+        33%{
+            left: 36px;
+            opacity: 0.33;
+        }
+
+        66%{
+            left: 18px;
+            opacity: 0.66
         }
         
         100%{
@@ -93,7 +103,7 @@
         font-size: 20px;
         text-align: center;
         border-radius: 20%;
-        box-shadow: 5px 5px 1px black;
+        box-shadow: 5px 5px 5px black;
         border-style: groove;
         padding: 15px;
         outline: none;
