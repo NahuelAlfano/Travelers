@@ -15,42 +15,60 @@ const input = document.getElementById('city');
 const submit = document.getElementById('button');
 const destination = document.getElementById('destination');
 const container = document.querySelector('info-container');
+const weatherInfo = document.getElementById('weatherInfo');
+
 
 // array de dias para mostrar el clima
 
 const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+
+// -------------- SECCION CLIMA ----------------
+
 // ASYNC FUNCTION PARA EL PRONOSTICO
 
-const getForecast = async () => {
-  
-  const weatherInput = input.value;
+async function getForecast(){
+    // valor ingresado en el input
+    const weatherInput = input.value;
+    
+    // url de la api, + '?q=' que es el query + el input guardado anteriormente + '&APPID' con la key de la api
 
-  const urlToFetch = weatherUrl + '?q=' + weatherInput + '&APPID='+ openWeatherKey;
-  
-  try{
-    const response = await fetch(urlToFetch);
-    if(response.ok){
-      const jsonResponse = await response.json();
-      console.log(jsonResponse);
-      return jsonResponse;
+    const urlToFetch = weatherUrl + '?q=' + weatherInput + '&APPID=' + openWeatherKey;
+
+    // try/catch se hace un fetch a la url guardada, se guarda en una constante, si devuelve ok se pasa a Json y se devuelve el valor
+
+    try{
+        const response = await fetch(urlToFetch);
+        if(response.ok){
+            const jsonResponse = await response.json();
+            console.log(jsonResponse);
+            return jsonResponse;
+        }
     }
-  }
-  catch(err){
-    console.log(err);
-  }
+    catch(err){
+        console.log(err);
+    }
 }
 
-// template para el html para la seccion de destination (clima)
+// template para el html para la seccion de weather(clima)
+// paso el json y accedo a lo que quiero mostrar
 
 const createWeatherHTML = (currentDay) => {
-    return `<h2>${weekDays}[(new Date()).getDay()]</h2>
+    return `<h2>${weekDays[(new Date()).getDay()]}</h2>
     <h2>Temperature: ${kelvinToCelsius(currentDay.main.temp)}&deg;C</h2>
-    <h2>Condition: ${currentDay.weather[0].description}</h2>`
+    <h2>Condition: ${currentDay.weather[0].description}</h2>
+    <img src="https://openweathermap.org/img/wn/${currentDay.weather[0].icon}@2x.png">`
 }
 
 // formula para pasar los grados kelvin que devuelve el json a celcius 
 
 const kelvinToCelsius = k => (k - 273.15).toFixed(0);
 
-getForecast()
+// genero el contenido html y lo agrego a la seccion weather
+
+function renderForecast(day) {
+    let weatherContent = createWeatherHTML(day);
+    weatherInfo.innerHTML = weatherContent;
+}
+
+getForecast().then(forecast => renderForecast(forecast));

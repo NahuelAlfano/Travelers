@@ -29,11 +29,11 @@
     }
     
     .fadeIn{
-        animation: fadeIn 2s;
+        animation: fadeIn 1s;
     }
     
     .fadeOut{
-        animation: fadeOut 2s;
+        animation: fadeOut 1s;
     }
     
     /* NAV SECTION KEYFRAMES */
@@ -43,17 +43,6 @@
             left: -50px;
             opacity: 0;
         }
-        
-        33%{
-            left: -36px;
-            opacity: 0.33;
-        }
-
-        66%{
-            left: -18px;
-            opacity: 0.66
-        }
-        
         100%{
             left: 0px;
             opacity: 1
@@ -65,17 +54,7 @@
             left: 50px;
             opacity: 0;
         }
-    
-        33%{
-            left: 36px;
-            opacity: 0.33;
-        }
 
-        66%{
-            left: 18px;
-            opacity: 0.66
-        }
-        
         100%{
             left: 0px;
             opacity: 1
@@ -103,17 +82,104 @@
         font-size: 20px;
         text-align: center;
         border-radius: 20%;
-        box-shadow: 5px 5px 5px black;
+        border: 1px solid hsl(243, 53%, 41%);
+        box-shadow: 5px 5px 5px hsl(243, 53%, 41%);
         border-style: groove;
         padding: 15px;
         outline: none;
     }
-
     
-    #button{
-        width: 50%;
-        padding: 5px;
-        margin-top: 20px;
+    .slideUpBtn {
+        padding: 12px 24px;
+        background-color: transparent;
+        border: 2px solid hsl(243, 80%, 62%);
+        border-radius: 6px;
+        position: relative;
+        margin: 20px;
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(1,.15,.34,.92)
+    }
+    
+    .slideUpBtn span {
+        display: inline-block;
+        transition: inherit;
+        color: hsl(243, 80%, 62%);
+    }
+    
+    .slideUpBtn:hover span {
+        opacity: 0;
+        transform: translateY(-100%)
+    }
+    
+    .slideUpBtn::before {
+        content: "";
+        background-color: hsl(243, 80%, 62%);;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        transform: translateY(100%);
+        transition: inherit;
+        width: 100%;
+        transition: transform 0.5s cubic-bezier(1,.15,.34,.92)
+    }
+    
+    .slideUpBtn::after {
+        content: 'Aterrizar';
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        left: 0;
+        position: absolute;
+        top: 0;
+        transition: inherit;
+        transform: translateY(100%);
+        width: 100%;
+    
+    }
+    
+    .slideUpBtn:hover::before {
+        transform: translateY(0) scale(3);
+        transition-delay: .025s;
+    }
+    
+    .slideUpBtn:hover::after {
+        opacity: 1;
+        color: hsl(222, 100%, 95%);
+        transform: translateY(0);
+    }   
+    
+    /* WEATHER SECTION */
+
+    #weather{
+        display: flex;
+        /* flex-direction: column; */
+        justify-content: center;
+        align-items: center;
     }
 
+    .weather {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid hsl(243, 53%, 41%);
+        box-shadow: 5px 5px 5px hsl(243, 53%, 41%);
+        
+    }
+
+    .section-title h2 {
+        display: flex;
+        justify-content: center;
+        font-size: 3rem;
+    }
+
+    .weather h2 {
+        margin: 10px;
+    }
+
+    /* .weather img{
+        width: 50%;
+    } */
 }
